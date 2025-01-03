@@ -1,9 +1,15 @@
-# jenkins-cicd
-or complete build of project
+# JENKINS CI-CD end-2-end Project
+For simulation of a ci-cd project that utilizes maven, JUnit, Jenkins, Sonartype Nexus, SonarQube, and Tomcat Webser. 
 
 
 
-## Install JAVA (a prerequisite for Jenkins and Maven)
+## Prequisites 
+- 4 Servers (jenkins_mvn_server, nexus_server, sonar_server, and tomcat_server)
+- type: ubuntu 
+- size: t2.medium 
+- SG: open necessary service ports (jenkins: 8080, sonarqube: 9000, nexus:8081, tomcat:8080)
+
+## On `jenkins_mvn_server` Install JAVA (a prerequisite for Jenkins and Maven)
 Add required dependencies for the jenkins package
 
      sudo apt update && sudo apt install fontconfig openjdk-17-jre -y
@@ -24,7 +30,7 @@ Add the Jenkins repository to your system's APT sources list and ensures that th
 
 Update and Install Jenkins and Maven
 
-    sudo apt-get update && sudo apt-get install jenkins -y
+    sudo apt update && sudo apt install jenkins maven -y
 
 
 ## Verify Installations and  Access Jenkins UI
@@ -39,4 +45,6 @@ You can enable, Start and Check Status of jenkins
 
     sudo systemctl status jenkins
 
+Access Jenkins UI and Configure Jenkins:
+On browser, paste http://`<public-IP-jenkins-server>`:8080
     
