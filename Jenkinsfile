@@ -14,6 +14,7 @@ pipeline {
 
         stage('Build with Maven') {
             steps {
+                dir(JJtechBatchApp)
                 sh "${MAVEN_HOME}/bin/mvn clean compile test package"
             }
         }
