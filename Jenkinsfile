@@ -3,7 +3,8 @@ pipeline {
     environment {
        // AWS_REGION = 'us-east-1'
         MAVEN_HOME = '/usr/share/maven'  // maven home directory.  Obtain home directory using mvn --version
-    }
+        ARTIFACT_PATH = 'target/JJtechBatchApp.war'
+        TOMCAT_URL = 'http://18.197.131.231:8080/'
     stages {
         stage('Checkout Code') {
             steps {
@@ -40,7 +41,7 @@ pipeline {
             }
         }
 
-
+            // use maven publish capability to push to nexus
         stage('Publish to Nexus with maven built-in capability') {
             steps {
                 dir('JJtechBatchApp') {
@@ -49,13 +50,13 @@ pipeline {
             }   
         }
 
-
-        stage('Publish to Nexus') {
+        // publish via plugin
+        stage('Publish to Nexus using Jenkins-nexus-plugin') {      //https://help.sonatype.com/en/nexus-platform-plugin-for-jenkins.html 
             steps {
                 script {
                     // Define artifact details
                     def artifactPath = 'JJtechBatchApp/target/JJtechBatchApp.war'
-                    def groupId = 'com.example'
+                    def groupId = 'com.jjtech'
                     def artifactId = 'JJtechBatchApp.war'
                     def version = '1.0.0'
                     def repository = 'maven-releases'
@@ -77,9 +78,19 @@ pipeline {
         }
 
 
+        stage('Deploy to Tomcat Server') {
+            steps {
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-creds', url: "${TOMCAT_URL}")], 
+                       //contextPath: '/YourApp',
+                       contextPath: '/JJtechBatchApp/welcome'
+                       war: "${ARTIFACT_PATH}"
+            }
+        }
+
+
 
         
-
+                  
 
 
 
