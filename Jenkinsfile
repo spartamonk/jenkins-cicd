@@ -44,7 +44,7 @@ pipeline {
         stage('Publish to Nexus') {
             steps {
                 dir('JJtechBatchApp') {
-                    sh "${MAVEN_HOME}/bin/ mvn deploy"
+                    sh "${MAVEN_HOME}/bin/mvn deploy"
               } 
             }   
         }
