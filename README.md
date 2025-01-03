@@ -17,7 +17,7 @@ Add required dependencies for the jenkins package
      java -version 
 
 
-## Install ***Maven** and  [Jenkins](https://www.jenkins.io/doc/book/installing/linux/#debianubuntu). 
+### Install ***Maven*** and  [Jenkins](https://www.jenkins.io/doc/book/installing/linux/#debianubuntu). 
 
 Downloads the GPG key required to verify the authenticity of Jenkins packages and saves it in the /usr/share/keyrings/ directory.
 
@@ -33,7 +33,7 @@ Update and Install Jenkins and Maven
     sudo apt update && sudo apt install jenkins maven -y
 
 
-## Verify Installations and  Access Jenkins UI
+### Verify Installations and  Access Jenkins UI
 
     mvn -h 
 
@@ -45,6 +45,6 @@ You can enable, Start and Check Status of jenkins
 
     sudo systemctl status jenkins
 
-Access Jenkins UI and Configure Jenkins:
+#### Access Jenkins UI and Configure Jenkins:
 On browser, paste http://`<public-IP-jenkins-server>`:8080
     
