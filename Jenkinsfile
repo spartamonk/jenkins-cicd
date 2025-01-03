@@ -20,6 +20,17 @@ pipeline {
          }
         }
 
+        stage('Scan') {
+            steps {
+                 withSonarQubeEnv(installationName: 'jenkins-sonar') { 
+                     sh './mvnw clean sonar:sonar'
+                 }
+            }
+        }
+
+
+        
+
 
 
 
