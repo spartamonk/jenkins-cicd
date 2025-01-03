@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-       // AWS_REGION = 'us-east-1'
         MAVEN_HOME = '/usr/share/maven'  // maven home directory.  Obtain home directory using mvn --version
         ARTIFACT_PATH = 'JJtechBatchApp/target/JJtechBatchApp.war'
         TOMCAT_URL = 'http://18.197.131.231:8080/'
@@ -15,13 +14,16 @@ pipeline {
             }
         }
 
-        stage('Build with Maven') {
+        stage('Build with Maven') { 
             steps {
                 dir('JJtechBatchApp'){
                 sh "${MAVEN_HOME}/bin/mvn clean compile test package"
             }
          }
         }
+
+        // Plugins Reference: 
+        // using the Sonar Plugin https://www.jenkins.io/doc/pipeline/steps/sonar/#waitforqualitygate-wait-for-sonarqube-analysis-to-be-completed-and-return-quality-gate-status
 
         stage('Scan') {
             steps {
@@ -43,7 +45,7 @@ pipeline {
             }
         }
 
-            // use maven publish capability to push to nexus
+            // use maven's built-in Distribution capability to push to nexus
         stage('Publish to Nexus with maven built-in capability') {
             steps {
                 dir('JJtechBatchApp') {
@@ -52,8 +54,11 @@ pipeline {
             }   
         }
 
-        // publish via plugin
-        stage('Publish to Nexus using Jenkins-nexus-plugin') {      //https://help.sonatype.com/en/nexus-platform-plugin-for-jenkins.html 
+        // publish via Nexus Plugin
+        //https://help.sonatype.com/en/nexus-platform-plugin-for-jenkins.html
+        https://www.jenkins.io/doc/pipeline/steps/nexus-artifact-uploader/
+        stage('Publish to Nexus using Jenkins-nexus-plugin') {      
+
             steps {
                 script {
                     // Define artifact details
@@ -79,11 +84,11 @@ pipeline {
             }
         }
 
-
+        // requires the Deploy to Container Plugin 
+        //https://www.jenkins.io/doc/pipeline/steps/deploy/?utm_source=chatgpt.com#deploy-deploy-warear-to-a-container
         stage('Deploy to Tomcat Server') {
             steps {
                 deploy adapters: [tomcat9(credentialsId: 'tomcat-creds', url: "${TOMCAT_URL}")], 
-                       //contextPath: '/YourApp',
                        war: "${ARTIFACT_PATH}"
                        //contextPath: '/JJtechBatchApp/welcome'
                       
@@ -91,27 +96,13 @@ pipeline {
         }
 
 
-
-        
-                  
-
-
-
-        // stage('Initialize Terraform') {
-        //     steps {
-        //         sh 'terraform init'
-        //     }
-        // }
-        // stage('Plan Terraform') {
-        //     steps {
-        //         sh 'terraform plan -out=tfplan'
-        //     }
-        // }
-        // stage('Apply Terraform') {
-        //     steps {
-        //         input message: "Approve deployment?", ok: "Deploy"
-        //         sh 'terraform apply tfplan'
-        //     }
-        // }
+    post {
+        success {
+            echo 'Build and Deployment Successful!'
+        }
+        failure {
+            echo 'Build or Deployment Failed. Check logs for details.'
+        }
+    
     }
 }
