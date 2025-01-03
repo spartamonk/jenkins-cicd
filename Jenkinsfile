@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     // Define artifact details
-                    def artifactPath = 'JJtechBatchApp/target/your-artifact.war'
+                    def artifactPath = 'JJtechBatchApp/target/JJtechBatchApp.war'
                     def groupId = 'com.example'
                     def artifactId = 'JJtechBatchApp.war'
                     def version = '1.0.0'
