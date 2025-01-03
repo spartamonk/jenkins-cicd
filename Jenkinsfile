@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
        // AWS_REGION = 'us-east-1'
-        MAVEN_HOME = '/usr/share/maven'  // maven home directory. 
+        MAVEN_HOME = '/usr/share/maven'  // maven home directory.  Obtain home directory using mvn --version
     }
     stages {
         stage('Checkout Code') {
@@ -27,6 +27,16 @@ pipeline {
                     // sh './mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'   To use a specific version of sonarqube
                     sh "${MAVEN_HOME}/bin/mvn clean sonar:sonar"       // uses the installed sonar plugin
                  } }
+            }
+        }
+
+
+
+        stage("Quality Gate") {       // for quality gates, the pipeline will wait for sonar to send back a success quality gate check. 
+             steps {
+                timeout(time: 2, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
 
