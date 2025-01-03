@@ -2,7 +2,7 @@
 For simulation of a ci-cd project that utilizes maven, JUnit, Jenkins, Sonartype Nexus, SonarQube, and Tomcat Webser. 
 
 
-
+# Setup
 ### Prequisites 
 - 4 Servers (`jenkins_mvn_server`, `nexus_server`, `sonar_server`, and `tomcat_server`). 
 NB: please use provided ***userdata scripts*** to install nexus, sonar and tomcat. See sections below. 
@@ -101,6 +101,27 @@ Install the following  non default plugins
 ##### Create global credentials for pipeline
 - Tomcat credentials : `tomcat-creds`
 - Nexus credentials  : `nexus-credentials-id`
+
+
+
+# DEMO
+
+- Fork this repository into your github space and replace all placeholders highlighted in files, `settings.xml`, `pom.xml` and `Jenkinsfile` accordingly. 
+
+### Create Jenkins Job with following high level steps. 
+In Jenkins, create a new Job using the Pipeline Job with `poll scm`. 
+
+- `New Item` (give a name) > Pipeline > OK
+
+- `Build Triggers` > Poll SCM > Schedule ( H/2 * * * *)
+
+- `Pipeline ` > Definition ( Pipeline script from SCM) >  follow on screen instructions. 
+
+With a successful configuration,  Jenkins should poll scm every 2 minutes. 
+
+
+
+-  Change src code and build again. 
 
 
 
