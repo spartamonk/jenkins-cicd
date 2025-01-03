@@ -31,14 +31,24 @@ pipeline {
         }
 
 
-
-        stage("Quality Gate") {       // for quality gates, the pipeline will wait for sonar to send back a success quality gate check. 
+        // For quality gates, the pipeline will wait for sonar to send back a success quality gate check.  : https://docs.sonarsource.com/sonarqube-server/9.9/analyzing-source-code/scanners/jenkins-extension-sonarqube/
+        stage("Quality Gate") {        
              steps {
                 timeout(time: 2, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
         }
+
+
+        stage('Publish to Nexus') {
+            steps {
+                dir('JJtechBatchApp') {
+                    sh "${MAVEN_HOME}/bin/ mvn deploy"
+              } 
+            }   
+        }
+
 
 
         
