@@ -41,12 +41,39 @@ pipeline {
         }
 
 
-        stage('Publish to Nexus') {
+        stage('Publish to Nexus with maven built-in capability') {
             steps {
                 dir('JJtechBatchApp') {
                     sh "${MAVEN_HOME}/bin/mvn -s settings.xml deploy"
               } 
             }   
+        }
+
+
+        stage('Publish to Nexus') {
+            steps {
+                script {
+                    // Define artifact details
+                    def artifactPath = 'JJtechBatchApp/target/your-artifact.war'
+                    def groupId = 'com.example'
+                    def artifactId = 'your-artifact'
+                    def version = '1.0.0'
+                    def repository = 'maven-releases'
+
+                    nexusArtifactUploader(
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        nexusUrl: '18.196.157.115:8081/',
+                        repository: repository,
+                        groupId: groupId,
+                        version: version,
+                        credentialsId: 'nexus-credentials-id',
+                        artifacts: [
+                            [artifactId: artifactId, file: artifactPath, type: 'war']
+                        ]
+                    )
+                }
+            }
         }
 
 
