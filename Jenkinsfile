@@ -85,7 +85,7 @@ pipeline {
                 deploy adapters: [tomcat9(credentialsId: 'tomcat-creds', url: "${TOMCAT_URL}")], 
                        //contextPath: '/YourApp',
                        war: "${ARTIFACT_PATH}"
-                       contextPath: '/JJtechBatchApp/welcome'
+                       //contextPath: '/JJtechBatchApp/welcome'
                       
             }
         }
