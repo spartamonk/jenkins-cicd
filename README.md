@@ -51,5 +51,5 @@ On browser, paste http://`<public-IP-jenkins-server>`:8080
 
 
 ## Install Nexus and SonarQube on `nexus_server` and `sonar_server` respectively. 
-Follow instructructions ***[here]***(https://github.com/mecbob/maven-nexus-sonarQube-demo)
+Follow instructructions [here](https://github.com/mecbob/maven-nexus-sonarQube-demo)
     
