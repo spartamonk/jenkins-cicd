@@ -56,7 +56,7 @@ pipeline {
                     // Define artifact details
                     def artifactPath = 'JJtechBatchApp/target/your-artifact.war'
                     def groupId = 'com.example'
-                    def artifactId = 'your-artifact'
+                    def artifactId = 'JJtechBatchApp.war'
                     def version = '1.0.0'
                     def repository = 'maven-releases'
 
