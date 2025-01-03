@@ -17,6 +17,10 @@ NB: please use provided ***userdata scripts*** to install nexus, sonar and tomca
 In order to install nexus and Sonar, please follow steps outlined [here](https://github.com/mecbob/maven-nexus-sonarQube-demo)
     
 
+### Configure SonarQube
+
+- create token
+- create sonar-jenkins webhook (only after the Jenkins Server is available) this will be used in the pipeline. 
 
 
 ## Install and Configure Tomcat Server 
@@ -85,5 +89,18 @@ You can enable, Start and Check Status of jenkins
 
 #### Access Jenkins UI and Configure Jenkins:
 On browser, paste http://`<public-IP-jenkins-server>`:8080
+
+- change admin credentials
+
+##### Install and configure Plugins
+Install the following  non default plugins
+- SonarQube scanner
+- NexusUploader
+- Deploy to container
+
+##### Create global credentials for pipeline
+- Tomcat credentials : `tomcat-creds`
+- Nexus credentials  : `nexus-credentials-id`
+
 
 

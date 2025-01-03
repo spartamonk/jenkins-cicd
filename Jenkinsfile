@@ -3,7 +3,7 @@ pipeline {
     environment {
         MAVEN_HOME = '/usr/share/maven'  // maven home directory.  Obtain home directory using mvn --version
         ARTIFACT_PATH = 'JJtechBatchApp/target/JJtechBatchApp.war'
-        TOMCAT_URL = 'http://18.197.131.231:8080/'
+        TOMCAT_URL = 'http://18.197.131.231:8080/'  // replace with your tomcat url
 
     }
     stages {
@@ -16,6 +16,7 @@ pipeline {
 
         stage('Build with Maven') { 
             steps {
+            // https://www.jenkins.io/doc/pipeline/steps/workflow-durable-task-step/
                 dir('JJtechBatchApp'){
                 sh "${MAVEN_HOME}/bin/mvn clean compile test package"
             }
@@ -56,7 +57,8 @@ pipeline {
 
         // publish via Nexus Plugin
         //https://help.sonatype.com/en/nexus-platform-plugin-for-jenkins.html
-        https://www.jenkins.io/doc/pipeline/steps/nexus-artifact-uploader/
+        //https://www.jenkins.io/doc/pipeline/steps/nexus-artifact-uploader/
+        
         stage('Publish to Nexus using Jenkins-nexus-plugin') {      
 
             steps {
@@ -65,17 +67,17 @@ pipeline {
                     def artifactPath = 'JJtechBatchApp/target/JJtechBatchApp.war'
                     def groupId = 'com.jjtech'
                     def artifactId = 'JJtechBatchApp.war'
-                    def version = '1.0.3'
+                    def version = '1.0.0'
                     def repository = 'maven-releases'
 
                     nexusArtifactUploader(
                         nexusVersion: 'nexus3',
                         protocol: 'http',
-                        nexusUrl: '18.196.157.115:8081/',
+                        nexusUrl: '18.196.157.115:8081/',  //replace me 
                         repository: repository,
                         groupId: groupId,
                         version: version,
-                        credentialsId: 'nexus-credentials-id',
+                        credentialsId: 'nexus-credentials-id', // (optional) replace me
                         artifacts: [
                             [artifactId: artifactId, file: artifactPath, type: 'war']
                         ]
@@ -88,7 +90,7 @@ pipeline {
         //https://www.jenkins.io/doc/pipeline/steps/deploy/?utm_source=chatgpt.com#deploy-deploy-warear-to-a-container
         stage('Deploy to Tomcat Server') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'tomcat-creds', url: "${TOMCAT_URL}")], 
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-creds', url: "${TOMCAT_URL}")],  // (optional) replace credential
                        war: "${ARTIFACT_PATH}"
                        //contextPath: '/JJtechBatchApp/welcome'
                       
