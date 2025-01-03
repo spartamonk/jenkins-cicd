@@ -23,7 +23,7 @@ pipeline {
         stage('Scan') {
             steps {
                  withSonarQubeEnv(installationName: 'jenkins-sonar') { 
-                     sh './mvnw clean sonar:sonar'
+                    sh "${MAVEN_HOME}/bin/mvn clean sonar:sonar"
                  }
             }
         }
