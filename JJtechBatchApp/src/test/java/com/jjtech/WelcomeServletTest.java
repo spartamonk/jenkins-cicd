@@ -33,6 +33,6 @@ public class WelcomeServletTest {
     public void testDoGet() throws Exception {
         welcomeServlet.doGet(request, response);
         verify(response).setContentType("text/html");
-        assertEquals("<h1>Welcome to JJtech Model Batch DevOps Maven Session</h1>", responseWriter.toString().trim());
+        assertEquals("<h1>Welcome to JJtech Model Batch DevOps complete ci-cd Git, Maven, Jenkins, Nexus, SonarQube Integration<</h1>", responseWriter.toString().trim());
     }
 }

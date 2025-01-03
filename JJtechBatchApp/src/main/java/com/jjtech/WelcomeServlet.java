@@ -14,7 +14,7 @@ public class WelcomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        response.getWriter().println("<h1>Welcome to JJtech Model Batch DevOps Maven Session</h1>");
+        response.getWriter().println("<h1>Welcome to JJtech Model Batch DevOps complete ci-cd Git, Maven, Jenkins, Nexus, SonarQube Integration</h1>");
     }
 }
 

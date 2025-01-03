@@ -65,7 +65,7 @@ pipeline {
                     def artifactPath = 'JJtechBatchApp/target/JJtechBatchApp.war'
                     def groupId = 'com.jjtech'
                     def artifactId = 'JJtechBatchApp.war'
-                    def version = '1.0.2'
+                    def version = '1.0.3'
                     def repository = 'maven-releases'
 
                     nexusArtifactUploader(
@@ -99,10 +99,10 @@ pipeline {
 
     post {
         success {
-            echo 'Build and Deployment Successful!'
+            echo 'Build and Deployment was Successful!'
         }
         failure {
-            echo 'Build or Deployment Failed. Check logs for details.'
+            echo 'Build or Deployment Failed. Verify logs for debug details.'
         }
     }
     
