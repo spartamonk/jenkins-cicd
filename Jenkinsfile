@@ -5,6 +5,8 @@ pipeline {
         MAVEN_HOME = '/usr/share/maven'  // maven home directory.  Obtain home directory using mvn --version
         ARTIFACT_PATH = 'target/JJtechBatchApp.war'
         TOMCAT_URL = 'http://18.197.131.231:8080/'
+
+    }
     stages {
         stage('Checkout Code') {
             steps {
