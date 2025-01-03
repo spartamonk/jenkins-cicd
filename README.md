@@ -120,8 +120,9 @@ In Jenkins, create a new Job using the Pipeline Job with `poll scm`.
 With a successful configuration,  Jenkins should poll scm every 2 minutes. 
 
 
-
 -  Change src code and build again. 
+
+- Access Appliction using Tomcat URL on browser. http://`<public-IP-jenkins-server>`:8080JJtechBatchApp/welcome
 
 
 
