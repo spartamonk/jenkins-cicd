@@ -22,9 +22,10 @@ pipeline {
 
         stage('Scan') {
             steps {
+                 dir('JJtechBatchApp') {
                  withSonarQubeEnv(installationName: 'jenkins-sonar') { 
                     sh "${MAVEN_HOME}/bin/mvn clean sonar:sonar"
-                 }
+                 } }
             }
         }
 
