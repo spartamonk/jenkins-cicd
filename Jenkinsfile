@@ -67,7 +67,7 @@ pipeline {
                     def artifactPath = 'JJtechBatchApp/target/JJtechBatchApp.war'
                     def groupId = 'com.jjtech'
                     def artifactId = 'JJtechBatchApp.war'
-                    def version = '1.0.0'
+                    def version = '1.0.1'
                     def repository = 'maven-releases'
 
                     nexusArtifactUploader(
