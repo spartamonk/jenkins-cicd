@@ -3,7 +3,7 @@ pipeline {
     environment {
         MAVEN_HOME = '/usr/share/maven'  // maven home directory.  Obtain home directory using mvn --version
         ARTIFACT_PATH = 'JJtechBatchApp/target/JJtechBatchApp.war'
-        TOMCAT_URL = 'http://18.197.131.231:8080/'  // replace with your tomcat url
+        TOMCAT_URL = 'http://54.147.46.25:8080/'  // replace with your tomcat url
 
     }
     stages {
@@ -29,7 +29,7 @@ pipeline {
         stage('Scan') {
             steps {
                  dir('JJtechBatchApp') {
-                 withSonarQubeEnv(installationName: 'jenkins-sonar') { 
+                 withSonarQubeEnv(installationName: 'jenkins-sonar') {  // replace with sonarQube plugin
                     // sh './mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'   To use a specific version of sonarqube
                     sh "${MAVEN_HOME}/bin/mvn clean sonar:sonar"       // uses the installed sonar plugin
                  } }
@@ -73,11 +73,11 @@ pipeline {
                     nexusArtifactUploader(
                         nexusVersion: 'nexus3',
                         protocol: 'http',
-                        nexusUrl: '18.196.157.115:8081/',  //replace me 
+                        nexusUrl: 'http://100.26.31.212:8081/',  //replace me 
                         repository: repository,
                         groupId: groupId,
                         version: version,
-                        credentialsId: 'nexus-credentials-id', // (optional) replace me
+                        credentialsId: 'jenkins-nexus', // (optional) replace me
                         artifacts: [
                             [artifactId: artifactId, file: artifactPath, type: 'war']
                         ]

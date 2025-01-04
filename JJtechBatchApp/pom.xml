@@ -90,12 +90,12 @@
     <!-- Snapshot Repository -->
     <snapshotRepository>
       <id>nexusdeploymentrepo</id>
-      <url>http://18.196.157.115:8081/repository/maven-snapshots/</url>        <!-- update repository with nexus configs-->
+      <url>http://100.26.31.212:8081/repository/maven-snapshots/</url>        <!-- update repository with nexus configs-->
     </snapshotRepository>
     <!-- Release Repository -->
     <repository>
       <id>nexusdeploymentrepo</id>
-      <url>http://18.196.157.115:8081/repository/maven-release/</url>           <!-- update repository with nexus configs-->
+      <url>http://100.26.31.212:8081/repository/maven-release/</url>           <!-- update repository with nexus configs-->
     </repository>
   </distributionManagement>
 </project>
