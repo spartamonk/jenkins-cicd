@@ -122,7 +122,7 @@ With a successful configuration,  Jenkins should poll scm every 2 minutes.
 
 -  Change src code and build again. 
 
-- Access Appliction using Tomcat URL on browser. http://`<public-IP-jenkins-server>`:8080JJtechBatchApp/welcome
+- Access Appliction using Tomcat URL on browser. http://`<public-IP-jenkins-server>`:8080/JJtechBatchApp/welcome
 
 
 
