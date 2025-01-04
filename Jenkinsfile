@@ -77,7 +77,7 @@ pipeline {
                         repository: repository,
                         groupId: groupId,
                         version: version,
-                        credentialsId: 'jenkins-nexus', // (optional) replace me
+                        credentialsId: 'nexus-creds', // (optional) replace me
                         artifacts: [
                             [artifactId: artifactId, file: artifactPath, type: 'war']
                         ]
