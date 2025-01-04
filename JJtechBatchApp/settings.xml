@@ -11,7 +11,7 @@
     <server>
       <id>nexusdeploymentrepo</id>    <!-- add credentials to your nexus -->
       <username>admin</username>
-      <password>jjtechadmin</password>
+      <password>admin</password>
     </server>
   </servers>
   <mirrors>
