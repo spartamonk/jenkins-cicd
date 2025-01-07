@@ -29,7 +29,7 @@ pipeline {
         stage('Scan') {
             steps {
                  dir('JJtechBatchApp') {
-                 withSonarQubeEnv(installationName: 'sonarqube-9.9.1.69595') {  // replace with sonarQube plugin
+                 withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonarqube-9.9.1.69595') {  // replace with sonarQube plugin
                     // sh './mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'   To use a specific version of sonarqube
                     sh "${MAVEN_HOME}/bin/mvn clean sonar:sonar"       // uses the installed sonar plugin
                  } }
