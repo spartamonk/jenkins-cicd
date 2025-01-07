@@ -3,14 +3,14 @@ pipeline {
     environment {
         MAVEN_HOME = '/usr/share/maven'  // maven home directory.  Obtain home directory using mvn --version
         ARTIFACT_PATH = 'JJtechBatchApp/target/JJtechBatchApp.war'
-        TOMCAT_URL = 'http://54.147.46.25:8080/'  // replace with your tomcat url
+        TOMCAT_URL = 'http://54.173.167.115:8080//'  // replace with your tomcat url
 
     }
     stages {
         stage('Checkout Code') {
             steps {
                // replace git URL below with your git repo url
-                git branch: 'main', url: 'https://github.com/mecbob/jenkins-cicd.git'
+                git branch: 'main', url: 'https://github.com/spartamonk/jenkins-cicd.git'
             }
         }
 
@@ -73,11 +73,11 @@ pipeline {
                     nexusArtifactUploader(
                         nexusVersion: 'nexus3',
                         protocol: 'http',
-                        nexusUrl: '100.26.31.212:8081/',  //replace me 
+                        nexusUrl: '174.129.62.125:8081/',  //replace me 
                         repository: repository,
                         groupId: groupId,
                         version: version,
-                        credentialsId: 'nexus-creds', // (optional) replace me
+                        credentialsId: 'nexus-3.75.1-01', // (optional) replace me
                         artifacts: [
                             [artifactId: artifactId, file: artifactPath, type: 'war']
                         ]
@@ -90,7 +90,7 @@ pipeline {
         //https://www.jenkins.io/doc/pipeline/steps/deploy/?utm_source=chatgpt.com#deploy-deploy-warear-to-a-container
         stage('Deploy to Tomcat Server') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'tomcat-creds', url: "${TOMCAT_URL}")],  // (optional) replace credential
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-9.0.98', url: "${TOMCAT_URL}")],  // (optional) replace credential
                        war: "${ARTIFACT_PATH}"
                        //contextPath: '/JJtechBatchApp/welcome'
                       
